@@ -1,5 +1,5 @@
 import 'dotenv/config'
-import makeWASocket, { DisconnectReason } from '@whiskeysockets/baileys'
+import makeWASocket, { DisconnectReason, Browsers } from '@whiskeysockets/baileys'
 import { createClient } from '@supabase/supabase-js'
 import ws from 'ws'
 import { useSupabaseAuthState } from './supabase-auth.js'
@@ -67,6 +67,9 @@ async function conectar() {
     auth: state,
     logger: pino({ level: 'silent' }),
     printQRInTerminal: false,
+    browser: Browsers.macOS('Desktop'),
+    connectTimeoutMs: 60000,
+    retryRequestDelayMs: 2000,
   })
 
   sock.ev.on('creds.update', saveCreds)
