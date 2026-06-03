@@ -87,6 +87,7 @@ async function conectar() {
     if (connection === 'close') {
       conectado = false
       const code = lastDisconnect?.error?.output?.statusCode
+      console.log('🔌 Conexão fechada. Código:', code, '| Erro:', lastDisconnect?.error?.message)
       if (code !== DisconnectReason.loggedOut) {
         console.log('🔄 Reconectando em 5s...')
         setTimeout(conectar, 5000)
