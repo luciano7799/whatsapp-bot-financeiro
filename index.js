@@ -8,7 +8,13 @@ import pino from 'pino'
 import express from 'express'
 import qrcode from 'qrcode-terminal'
 
-// Supabase client criado lazy para garantir que as env vars já foram injetadas
+// Debug: mostra quais variáveis estão disponíveis
+console.log('ENV CHECK:', {
+  SUPABASE_URL: process.env.SUPABASE_URL ? '✅ definida' : '❌ UNDEFINED',
+  SUPABASE_KEY: process.env.SUPABASE_KEY ? '✅ definida' : '❌ UNDEFINED',
+  WHATSAPP_NUMBER: process.env.WHATSAPP_NUMBER || '❌ UNDEFINED',
+})
+
 const getSupabase = () => createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY)
 
 // Servidor web — mostra status e QR code
