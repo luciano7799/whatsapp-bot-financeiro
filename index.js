@@ -13,6 +13,9 @@ console.log('ENV CHECK:', {
   SUPABASE_URL: process.env.SUPABASE_URL ? '✅ definida' : '❌ UNDEFINED',
   SUPABASE_KEY: process.env.SUPABASE_KEY ? '✅ definida' : '❌ UNDEFINED',
   WHATSAPP_NUMBER: process.env.WHATSAPP_NUMBER || '❌ UNDEFINED',
+  RAILWAY_ENV: process.env.RAILWAY_ENVIRONMENT || '❌ UNDEFINED',
+  RAILWAY_SERVICE: process.env.RAILWAY_SERVICE_NAME || '❌ UNDEFINED',
+  TOTAL_ENV_KEYS: Object.keys(process.env).length,
 })
 
 const getSupabase = () => createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY)
