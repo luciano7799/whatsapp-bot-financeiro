@@ -8,7 +8,8 @@ import pino from 'pino'
 import express from 'express'
 import qrcode from 'qrcode-terminal'
 
-const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY)
+// Supabase client criado lazy para garantir que as env vars já foram injetadas
+const getSupabase = () => createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY)
 
 // Servidor web — mostra status e QR code
 const app = express()
@@ -48,7 +49,7 @@ app.listen(PORT, () => console.log(`🌐 Servidor rodando na porta ${PORT}`))
 let sock
 
 async function conectar() {
-  const { state, saveCreds } = await useSupabaseAuthState(supabase)
+  const { state, saveCreds } = await useSupabaseAuthState(getSupabase())
 
   sock = makeWASocket.default({
     auth: state,
