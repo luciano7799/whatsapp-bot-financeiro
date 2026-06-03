@@ -1,11 +1,9 @@
 // Salva a sessão do Baileys no Supabase em vez de arquivos locais
-import { createClient } from '@supabase/supabase-js'
 import { BufferJSON, initAuthCreds } from '@whiskeysockets/baileys'
 
 const TABLE = 'whatsapp_session'
 
 export async function useSupabaseAuthState(supabase) {
-  // Garante que a tabela existe (criada via SQL no Supabase)
   const readData = async key => {
     const { data } = await supabase.from(TABLE).select('value').eq('key', key).single()
     if (!data) return null

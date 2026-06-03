@@ -1,11 +1,12 @@
 import { createClient } from '@supabase/supabase-js'
 import { getMonth, getYear, parseISO, format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
+import ws from 'ws'
 
 const R$ = v => 'R$ ' + Math.abs(v).toLocaleString('pt-BR', { minimumFractionDigits: 2 })
 
 export async function gerarResumo() {
-  const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY)
+  const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY, { realtime: { transport: ws } })
   const { data, error } = await supabase
     .from('transacoes')
     .select('data')

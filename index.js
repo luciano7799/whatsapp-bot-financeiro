@@ -1,6 +1,7 @@
 import 'dotenv/config'
 import makeWASocket, { DisconnectReason } from '@whiskeysockets/baileys'
 import { createClient } from '@supabase/supabase-js'
+import ws from 'ws'
 import { useSupabaseAuthState } from './supabase-auth.js'
 import { gerarResumo } from './resumo.js'
 import cron from 'node-cron'
@@ -18,7 +19,9 @@ console.log('ENV CHECK:', {
   TOTAL_ENV_KEYS: Object.keys(process.env).length,
 })
 
-const getSupabase = () => createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY)
+const getSupabase = () => createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY, {
+  realtime: { transport: ws },
+})
 
 // Servidor web — mostra status e QR code
 const app = express()
