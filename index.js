@@ -63,7 +63,7 @@ let sock
 async function conectar() {
   const { state, saveCreds } = await useSupabaseAuthState(getSupabase())
 
-  sock = makeWASocket.default({
+  sock = makeWASocket({
     auth: state,
     logger: pino({ level: 'silent' }),
     printQRInTerminal: false,

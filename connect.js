@@ -6,7 +6,7 @@ import pino from 'pino'
 
 const { state, saveCreds } = await useMultiFileAuthState('./auth_session')
 
-const sock = makeWASocket.default({
+const sock = makeWASocket({
   auth: state,
   logger: pino({ level: 'silent' }),
   printQRInTerminal: false,
